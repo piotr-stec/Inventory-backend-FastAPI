@@ -1,0 +1,22 @@
+version: '3.10'
+
+services:
+  web:
+    build: .
+    command: uvicorn src.api:app --host 0.0.0.0
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+
+
+  db:
+    image: postgres
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=inventory
+      - POSTGRES_PASSWORD=inventory
+      - POSTGRES_DB=inventory
