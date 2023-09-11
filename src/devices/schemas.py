@@ -1,5 +1,5 @@
-import datetime
-
+from datetime import date
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -25,12 +25,30 @@ class Device(DeviceBase):
         orm_mode = True
 
 
+class DeviceDetailLocation(BaseModel):
+    dev_id: int
+    dev_name: str
+    dev_type: str
+    dev_serial_number: str
+    dev_location: str
+    is_loan: bool
+    start_date: Optional[date] = None
+    return_date: Optional[date] = None
+
+
+class DeviceDetail(Device):
+    dev_location: str
+    dev_owner_id: str
+    dev_owner_name: str
+    is_loan: bool
+
+
 class DeviceLocationBase(BaseModel):
     dev_id: int
     location: str
 
 
-class DeviceLocationBaseCreate(DeviceLocationBase):
+class DeviceLocationCreate(DeviceLocationBase):
     pass
 
 
@@ -39,5 +57,6 @@ class DeviceLocation(DeviceLocationBase):
 
     class Config:
         orm_mode = True
+
 
 

@@ -9,7 +9,6 @@ class Device(Base):
     dev_name = Column(String)
     dev_type = Column(String)
     dev_serial_number = Column(String)
-    dev_date_of_purchase = Column(String)
 
 
 class DeviceLocation(Base):

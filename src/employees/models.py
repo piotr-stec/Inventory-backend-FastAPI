@@ -1,3 +1,4 @@
+from datetime import date
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Date
 
 from src.database.core import Base
@@ -20,5 +21,6 @@ class DeviceOwner(Base):
     id = Column(Integer, primary_key=True, index=True)
     emp_id = Column(Integer, ForeignKey("emp.emp_id"))
     dev_id = Column(Integer, ForeignKey("dev.dev_id"))
-    start_date = Column(String)
+    is_loan = Column(Boolean, default=True)
+    start_date = Column(Date, default=date.today)
     return_date = Column(Date, nullable=True)

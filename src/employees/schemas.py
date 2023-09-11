@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr, validator
-from datetime import datetime
+from datetime import date
+from src.devices.schemas import DeviceDetailLocation
 
 
 class EmpBase(BaseModel):
@@ -39,10 +40,13 @@ class EmpCreate(EmpBase):
         return v
 
 
-
-
 class EmpUpdate(EmpBase):
     emp_id: int
+
+
+class EmpStatusUpdate(BaseModel):
+    emp_name: str
+    is_admin: bool = True
 
 
 class Emp(EmpBase):
@@ -55,8 +59,14 @@ class Emp(EmpBase):
 class DeviceOwnerBase(BaseModel):
     emp_id: int
     dev_id: int
-    start_date: str
-    return_date: str
+
+
+class ReturnDevice(BaseModel):
+    dev_id: int
+    emp_id: int
+
+
+
 
 
 class DeviceOwnerCreate(DeviceOwnerBase):
@@ -68,3 +78,20 @@ class DeviceOwner(DeviceOwnerBase):
 
     class Config:
         orm_mode = True
+
+
+# class ReturnDeviceResponseView(DeviceOwner):
+#     is_loan: bool
+#     start_date: date
+#     return_date: date
+
+
+class EmpDetailed(BaseModel):
+    emp_id: int
+    emp_name: str
+    emp_first_name: str
+    emp_last_name: str
+    is_admin: bool
+    emp_email: EmailStr
+    emp_phone_number: str
+    emp_devices: list[DeviceDetailLocation]
