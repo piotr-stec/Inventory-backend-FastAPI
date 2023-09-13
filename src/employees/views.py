@@ -13,7 +13,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 router = APIRouter(prefix="/employee", tags=["employee"])
 
 
-@router.post("/", response_model=schemas.Emp)
+@router.post("/create_emp/", response_model=schemas.Emp)
 def create_user(emp: schemas.EmpCreate, db: Session = Depends(get_db), current_user: schemas.Emp = Depends(get_current_user)):
     try:
         new_user = service.create_emp(emp, db, current_user)
@@ -26,7 +26,7 @@ def create_user(emp: schemas.EmpCreate, db: Session = Depends(get_db), current_u
         raise HTTPException(status_code=404, detail="User name already exists")
 
 
-@router.get("/", response_model=list[schemas.EmpDetailed])
+@router.get("/emp_detailed_view/", response_model=list[schemas.EmpDetailed])
 def get_all_emp_detailed(db: Session = Depends(get_db), current_user: schemas.Emp = Depends(get_current_user)):
     try:
         return service.show_all_users_detailed(db, current_user)

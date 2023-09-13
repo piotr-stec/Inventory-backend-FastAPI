@@ -66,9 +66,6 @@ class ReturnDevice(BaseModel):
     emp_id: int
 
 
-
-
-
 class DeviceOwnerCreate(DeviceOwnerBase):
     pass
 
@@ -78,12 +75,6 @@ class DeviceOwner(DeviceOwnerBase):
 
     class Config:
         orm_mode = True
-
-
-# class ReturnDeviceResponseView(DeviceOwner):
-#     is_loan: bool
-#     start_date: date
-#     return_date: date
 
 
 class EmpDetailed(BaseModel):

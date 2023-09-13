@@ -13,7 +13,7 @@ from fastapi import APIRouter, Depends, HTTPException
 router = APIRouter(prefix="/device", tags=["device"])
 
 
-@router.post("/", response_model=Device)
+@router.post("/add_device/", response_model=Device)
 def add_device(device: DeviceCreate, db: Session = Depends(get_db), current_user: schemas.Emp = Depends(get_current_user)):
     try:
         added_device = service.add_device(device, db, current_user)
@@ -22,7 +22,7 @@ def add_device(device: DeviceCreate, db: Session = Depends(get_db), current_user
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.get("/", response_model=list[DeviceDetail])
+@router.get("/device_detailed_view/", response_model=list[DeviceDetail])
 def get_all_devices_detailed(db: Session = Depends(get_db), current_user: schemas.Emp = Depends(get_current_user)):
     try:
         return service.show_all_device_detailed(db, current_user)
